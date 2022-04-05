@@ -12,16 +12,16 @@ import java.util.List;
 @RequestMapping("/pies")
 public  class PIESController{
 
-    @Autowired
-    CouchbaseServerDataAccessImp
+
+   // CouchbaseServerDataAccessImp
 
     @Autowired
     private PIESRepo piesRepo;
 
-    @GetMapping(method=RequestMethod.GET, value="{id}")
-    public String getPIES(@PathVariable String id) throws Exception{
-        return couchbaseS;
-    }
+    //@GetMapping(method=RequestMethod.GET, value="{id}")
+  //  public String getPIES(@PathVariable String id) throws Exception{
+   //     return couchbaseS;
+   // }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
