@@ -11,12 +11,14 @@ import org.springframework.data.couchbase.SimpleCouchbaseClientFactory;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 import org.springframework.data.couchbase.core.CouchbaseTemplate;
 import org.springframework.data.couchbase.core.convert.CouchbaseCustomConversions;
+import org.springframework.data.couchbase.repository.config.EnableCouchbaseRepositories;
 import org.springframework.data.couchbase.repository.config.RepositoryOperationsMapping;
 
 import java.util.Collections;
 
 
 @Configuration
+@EnableCouchbaseRepositories(basePackages={"com.autozone.pic.repository"})
 public class Config extends AbstractCouchbaseConfiguration {
 
     @Autowired

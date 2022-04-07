@@ -1,18 +1,24 @@
 package com.autozone.pic.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
+import org.springframework.data.couchbase.core.mapping.Field;
 
-@Document
-@Setter
-@Getter
-public class PIES{
+@Document()
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class PIES {
+
     @Id
-	private Integer id;
+    @Field
+	private String id;
 
-
-    private String name;
+    @Field
+    private AzDataObject azDataObject;
 
 }
