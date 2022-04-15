@@ -12,7 +12,7 @@ import org.springframework.data.couchbase.core.mapping.Field;
 @NoArgsConstructor
 @EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PIES {
+public class PRODUCT {
 
     @Id
     @Field

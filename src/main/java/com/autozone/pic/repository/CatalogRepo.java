@@ -1,11 +1,11 @@
 package com.autozone.pic.repository;
 
-import com.autozone.pic.model.ACES;
-import com.autozone.pic.model.PIES;
+import com.autozone.pic.model.CATALOG;
+import com.autozone.pic.model.PRODUCT;
 import org.springframework.data.couchbase.repository.CouchbaseRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ACESRepo extends CouchbaseRepository<ACES, Integer> {
+public interface CatalogRepo extends CouchbaseRepository<CATALOG, Integer> {
 
 }

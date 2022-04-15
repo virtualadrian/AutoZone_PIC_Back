@@ -5,14 +5,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AzDataObject {
+public class PrimaryElementsObject {
 
-    private AzMetaDataObject azMetaDataObject;
-    private PrimaryElementsObject primaryElementsObject;
+    private String apReferenceVendorId;
 
 }

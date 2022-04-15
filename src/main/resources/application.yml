@@ -1,8 +1,8 @@
 app:
   couchbase:
-    connection-string: couchbase://127.0.0.1
-    user-name: Administrator
-    password: SOME_AWESOME_PASSWORD_HERE
+    connection-string: couchbase://127.0.0.1:8080
+    user-name: tester1
+    password: tester
     bucket-PIES: PRODUCTS
     bucket-ACES: CATALOG
 
