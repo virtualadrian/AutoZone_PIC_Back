@@ -16,7 +16,6 @@ import org.springframework.data.couchbase.repository.config.RepositoryOperations
 
 import java.util.Collections;
 
-
 @Configuration
 @EnableCouchbaseRepositories(basePackages={"com.autozone.pic.repository"})
 public class Config extends AbstractCouchbaseConfiguration {
@@ -77,4 +76,29 @@ public class Config extends AbstractCouchbaseConfiguration {
     private CouchbaseClientFactory couchbaseClientFactory(String bucketName){
         return new SimpleCouchbaseClientFactory(couchbaseCluster(couchbaseClusterEnvironment()), bucketName, this.getScopeName());
     }
+//    private List<String> getOriginList() {
+//        return List.of("*");
+//    }
+//    @Bean
+//    public FilterRegistrationBean<CorsFilter> getCorsFilter() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true);
+//        config.setAllowedOrigins(getOriginList());
+//        config.addAllowedHeader("*");
+//        config.addAllowedMethod("GET");
+//        config.addAllowedMethod("HEAD");
+//        config.addAllowedMethod("POST");
+//        config.addAllowedMethod("PUT");
+//        config.addAllowedMethod("DELETE");
+//        config.addAllowedMethod("TRACE");
+//        config.addAllowedMethod("OPTIONS");
+//        config.addAllowedMethod("PATCH");
+//        source.registerCorsConfiguration("/**", config);
+//        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>();
+//        bean.setFilter(new CorsFilter(source));
+//        bean.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
+//        return bean;
+//    }
 }
+

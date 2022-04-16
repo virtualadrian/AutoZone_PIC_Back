@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,9 +15,9 @@ public class AzMetaDataObject {
 
 	private String createUserId;
 
-    private String createUserTs;
+    private LocalDateTime createUserTs;
 
-    private String lastMaintainTs;
+    private LocalDateTime lastMaintainTs;
 
     private String lastMaintainUserId;
 

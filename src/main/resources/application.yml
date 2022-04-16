@@ -1,6 +1,6 @@
 app:
   couchbase:
-    connection-string: couchbase://127.0.0.1:8080
+    connection-string: couchbase://127.0.0.1
     user-name: tester1
     password: tester
     bucket-PIES: PRODUCTS
