@@ -33,19 +33,28 @@ public class ProductController {
     }
 
 
-    @GetMapping(path = "countbydaterange")
+    @GetMapping(path = "find_by_date_range")
     @ResponseStatus(HttpStatus.OK)
-    public List<PRODUCT> getProductCount(@RequestParam(value = "days") Integer days){
-        System.out.println(LocalDateTime.now().minusDays(days));
-        System.out.println(days);
-        return ProductsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThan(LocalDateTime.now().minusDays(days));
+    public List<PRODUCT> getProductCountByRange(@RequestParam(value = "days") Integer days){
+       // System.out.println(LocalDateTime.now().minusDays(days));
+       // System.out.println(days);
+        return ProductsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThan(LocalDateTime.now().minusDays(days).toString());
 
 
     }
 
-    @GetMapping(path = "countall")
+    @GetMapping(path = "find_by_date")
     @ResponseStatus(HttpStatus.OK)
-    public Long countProducts(){
+    public List<PRODUCT> getProductByDate(@RequestParam(value = "days") Integer days){
+        String dateTime = LocalDateTime.now().minusDays(days).toString();
+        String truncatedDateTime = dateTime.substring(0, dateTime.indexOf('T'));
+        return ProductsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContaining(truncatedDateTime);
+    }
+
+
+    @GetMapping(path = "count")
+    @ResponseStatus(HttpStatus.OK)
+    public Long getProductCount(){
         return ProductsRepo.count();
     }
 }

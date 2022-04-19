@@ -4,20 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
+import org.springframework.data.couchbase.core.mapping.Document;
 
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Document
 public class AzMetaDataObject {
 
 	private String createUserId;
 
-    private LocalDateTime createUserTs;
+    private String createUserTs;
 
-    private LocalDateTime lastMaintainTs;
+    private String lastMaintainTs;
 
     private String lastMaintainUserId;
 
