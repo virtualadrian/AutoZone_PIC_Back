@@ -12,12 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/product")
 public class ProductController {
-
-
-
     @Autowired
     private ProductsRepo ProductsRepo;
-
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -32,23 +28,30 @@ public class ProductController {
         return ProductsRepo.findAll();
     }
 
-
     @GetMapping(path = "find_by_date_range")
     @ResponseStatus(HttpStatus.OK)
-    public List<PRODUCT> getProductCountByRange(@RequestParam(value = "days") Integer days){
-       // System.out.println(LocalDateTime.now().minusDays(days));
-       // System.out.println(days);
-        return ProductsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThan(LocalDateTime.now().minusDays(days).toString());
+    public List<PRODUCT> findByDateRange(@RequestParam(value = "days") Integer daysFromToday){
+        return ProductsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThan(LocalDateTime.now().minusDays(daysFromToday).toString());
+    }
 
-
+    @GetMapping(path = "find_count_by_date_range")
+    @ResponseStatus(HttpStatus.OK)
+    public Long findCountByDateRange(@RequestParam(value = "days") Integer daysFromToday){
+        return ProductsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThan(LocalDateTime.now().minusDays(daysFromToday).toString()).stream().count();
     }
 
     @GetMapping(path = "find_by_date")
     @ResponseStatus(HttpStatus.OK)
-    public List<PRODUCT> getProductByDate(@RequestParam(value = "days") Integer days){
-        String dateTime = LocalDateTime.now().minusDays(days).toString();
+    public List<PRODUCT> findByDate(@RequestParam(value = "days") Integer daysFromToday){
+        String dateTime = LocalDateTime.now().minusDays(daysFromToday).toString();
         String truncatedDateTime = dateTime.substring(0, dateTime.indexOf('T'));
         return ProductsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContaining(truncatedDateTime);
+    }
+
+    @GetMapping(path = "find_count_by_date")
+    @ResponseStatus(HttpStatus.OK)
+    public Long findCountByDate(@RequestParam(value = "days") Integer daysFromToday){
+        return findByDate(daysFromToday).stream().count();
     }
 
 
