@@ -13,31 +13,31 @@ import java.util.List;
 @RequestMapping("/api/product")
 public class ProductController {
     @Autowired
-    private ProductsRepo ProductsRepo;
+    private ProductsRepo productsRepo;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public String saveProduct(@RequestBody PRODUCT product){
-        ProductsRepo.save(product);
+        productsRepo.save(product);
         return "saved";
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<PRODUCT> getAllProducts(){
-        return ProductsRepo.findAll();
+        return productsRepo.findAll();
     }
 
     @GetMapping(path = "find_by_date_range")
     @ResponseStatus(HttpStatus.OK)
     public List<PRODUCT> findByDateRange(@RequestParam(value = "days") Integer daysFromToday){
-        return ProductsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThan(LocalDateTime.now().minusDays(daysFromToday).toString());
+        return productsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThan(LocalDateTime.now().minusDays(daysFromToday).toString());
     }
 
     @GetMapping(path = "find_count_by_date_range")
     @ResponseStatus(HttpStatus.OK)
     public Long findCountByDateRange(@RequestParam(value = "days") Integer daysFromToday){
-        return ProductsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThan(LocalDateTime.now().minusDays(daysFromToday).toString()).stream().count();
+        return productsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThan(LocalDateTime.now().minusDays(daysFromToday).toString()).stream().count();
     }
 
     @GetMapping(path = "find_by_date")
@@ -45,7 +45,15 @@ public class ProductController {
     public List<PRODUCT> findByDate(@RequestParam(value = "days") Integer daysFromToday){
         String dateTime = LocalDateTime.now().minusDays(daysFromToday).toString();
         String truncatedDateTime = dateTime.substring(0, dateTime.indexOf('T'));
-        return ProductsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContaining(truncatedDateTime);
+        return productsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContaining(truncatedDateTime);
+    }
+
+    @GetMapping(path = "find_by_date_and_schema")
+    @ResponseStatus(HttpStatus.OK)
+    public List<PRODUCT> findByDateAndSchemaName(@RequestParam(value = "days") Integer daysFromToday, @RequestParam(value = "schemaName") String schemaName){
+        String dateTime = LocalDateTime.now().minusDays(daysFromToday).toString();
+        String truncatedDateTime = dateTime.substring(0, dateTime.indexOf('T'));
+        return productsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThanAndAzDataObject_AzMetaDataObject_SchemaNm(truncatedDateTime, schemaName);
     }
 
     @GetMapping(path = "find_count_by_date")
@@ -58,6 +66,6 @@ public class ProductController {
     @GetMapping(path = "count")
     @ResponseStatus(HttpStatus.OK)
     public Long getProductCount(){
-        return ProductsRepo.count();
+        return productsRepo.count();
     }
 }
