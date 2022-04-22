@@ -34,7 +34,7 @@ public  class CatalogController{
     @GetMapping(path = "find_notes_by_date")
     @ResponseStatus(HttpStatus.OK)
     public List<CATALOG> findNotesByDateRange(@RequestParam(value = "days") Integer daysFromToday){
-        return CatalogRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContainingAndSchemaNmEquals(LocalDateTime.now().minusDays(daysFromToday).toString(),"productCatalogNote");
+        return CatalogRepo.findAllAppsByAzDataObject_AzMetaDataObject_LastMaintainTsContaining(LocalDateTime.now().minusDays(daysFromToday).toString());
     }
 
 //    @GetMapping(path = "find_apps_by_date")

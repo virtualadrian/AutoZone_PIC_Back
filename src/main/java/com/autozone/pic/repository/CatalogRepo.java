@@ -21,7 +21,7 @@ public interface CatalogRepo extends CouchbaseRepository<CATALOG, String> {
     public List<CATALOG> findAllAppsByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThan(String minusDays);
     public List<CATALOG> findAllAppsByAzDataObject_AzMetaDataObject_LastMaintainTsContaining(String truncatedDateTime);
 
-    List<CATALOG> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContainingAndSchemaNmEquals(String productCatalogNote, String toString);
+//    List<CATALOG> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContainingAndSchemaNmEquals(String productCatalogNote, String toString);
 
     //List<CATALOG> findAllAppsByAzDataObject_AzMetaDataObject_EqualsAndLastMaintainTsGreaterThan(String productCatalogFitment, String toString);
 }
