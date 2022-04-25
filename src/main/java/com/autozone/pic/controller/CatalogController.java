@@ -30,18 +30,28 @@ public class CatalogController{
 
     @GetMapping(path = "find_by_date_range")
     @ResponseStatus(HttpStatus.OK)
-    public List<PRODUCT> findNByDateRange(@RequestParam(value = "days") Integer daysFromToday, @RequestParam(value = "schemaName") String schemaName){
+    public List<PRODUCT> findByDateRange(@RequestParam(value = "days") Integer daysFromToday, @RequestParam(value = "schemaName") String schemaName){
+        return catalogsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThanAndAzDataObject_AzMetaDataObject_SchemaNm(daysFromToday, schemaName);
+    }
+
+    @GetMapping(path = "find_by_date")
+    @ResponseStatus(HttpStatus.OK)
+    public List<PRODUCT> findByDate(@RequestParam(value = "days") Integer daysFromToday, @RequestParam(value = "schemaName") String schemaName){
         String dateTime = LocalDateTime.now().minusDays(daysFromToday).toString();
         String truncatedDateTime = dateTime.substring(0, dateTime.indexOf('T'));
-        return catalogsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThanAndAzDataObject_AzMetaDataObject_SchemaNm(truncatedDateTime, schemaName);
+        return catalogsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContainingAndAzDataObject_AzMetaDataObject_SchemaNm(truncatedDateTime, schemaName);
+    }
+
+    @GetMapping(path = "find_count_by_date")
+    @ResponseStatus(HttpStatus.OK)
+    public Long findCountByDate(@RequestParam(value = "days") Integer daysFromToday, @RequestParam(value = "schemaName") String schemaName){
+        return findByDate(daysFromToday, schemaName).stream().count();
     }
 
     @GetMapping(path = "find_count_by_date_range")
     @ResponseStatus(HttpStatus.OK)
     public Long findCountByDateRange(@RequestParam(value = "days") Integer daysFromToday, @RequestParam(value = "schemaName") String schemaName){
-        String dateTime = LocalDateTime.now().minusDays(daysFromToday).toString();
-        String truncatedDateTime = dateTime.substring(0, dateTime.indexOf('T'));
-        return catalogsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThanAndAzDataObject_AzMetaDataObject_SchemaNm(truncatedDateTime, schemaName).stream().count();
+        return catalogsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThanAndAzDataObject_AzMetaDataObject_SchemaNm(daysFromToday, schemaName).stream().count();
     }
 
 

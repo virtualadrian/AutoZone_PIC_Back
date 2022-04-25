@@ -16,13 +16,7 @@ import java.util.List;
 @Collection()
 @ScanConsistency(query = QueryScanConsistency.REQUEST_PLUS)
 public interface CatalogsRepo extends CouchbaseRepository<CATALOG, String> {
-    List<PRODUCT> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThanAndAzDataObject_AzMetaDataObject_SchemaNm(String truncatedDateTime, String productCatalogFitment);
-//    public List<CATALOG> findAllNotesByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThan(String minusDays);
-//    public List<CATALOG> findAllNotesByAzDataObject_AzMetaDataObject_LastMaintainTsContaining(String truncatedDateTime);
-//    public List<CATALOG> findAllAppsByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThan(String minusDays);
-//    public List<CATALOG> findAllAppsByAzDataObject_AzMetaDataObject_LastMaintainTsContaining(String truncatedDateTime);
+    List<PRODUCT> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThanAndAzDataObject_AzMetaDataObject_SchemaNm(Integer dateTime, String productCatalogFitment);
 
-//    List<CATALOG> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContainingAndSchemaNmEquals(String productCatalogNote, String toString);
-
-    //List<CATALOG> findAllAppsByAzDataObject_AzMetaDataObject_EqualsAndLastMaintainTsGreaterThan(String productCatalogFitment, String toString);
+    List<PRODUCT> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContainingAndAzDataObject_AzMetaDataObject_SchemaNm(String truncatedDateTime, String schemaName);
 }
