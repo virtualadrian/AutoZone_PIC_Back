@@ -1,5 +1,4 @@
 package com.autozone.pic.model;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -13,7 +12,6 @@ import org.springframework.data.couchbase.core.mapping.Field;
 @EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PRODUCT {
-
     @Id
     @Field
 	private String id;

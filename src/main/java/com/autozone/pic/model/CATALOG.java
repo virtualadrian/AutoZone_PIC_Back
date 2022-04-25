@@ -1,17 +1,20 @@
 package com.autozone.pic.model;
-
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.Field;
 
-@Document
-@Setter
-@Getter
+@Document()
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CATALOG {
     @Id
-    private Integer id;
+    @Field
+    private String id;
 
     @Field
     private AzDataObject azDataObject;

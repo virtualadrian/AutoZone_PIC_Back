@@ -1,6 +1,6 @@
 package com.autozone.pic.config;
 
-import com.autozone.pic.model.PRODUCT;
+import com.autozone.pic.model.CATALOG;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -61,8 +61,10 @@ public class Config extends AbstractCouchbaseConfiguration {
     @SneakyThrows
     @Override
     protected void configureRepositoryOperationsMapping(RepositoryOperationsMapping mapping) {
-        mapping.mapEntity(PRODUCT.class,getCouchbaseTemplate(piesBucket ));
+        mapping.mapEntity(CATALOG.class,getCouchbaseTemplate(acesBucket ));
     }
+
+
 
     @SneakyThrows
     private CouchbaseTemplate getCouchbaseTemplate(String bucketName) throws Exception {
