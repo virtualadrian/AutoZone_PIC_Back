@@ -17,6 +17,5 @@ import java.util.List;
 @ScanConsistency(query = QueryScanConsistency.REQUEST_PLUS)
 public interface CatalogsRepo extends CouchbaseRepository<CATALOG, String> {
     List<PRODUCT> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThanAndAzDataObject_AzMetaDataObject_SchemaNm(Integer dateTime, String productCatalogFitment);
-
     List<PRODUCT> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContainingAndAzDataObject_AzMetaDataObject_SchemaNm(String truncatedDateTime, String schemaName);
 }

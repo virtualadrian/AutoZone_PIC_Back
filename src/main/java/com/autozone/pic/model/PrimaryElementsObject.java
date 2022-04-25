@@ -12,7 +12,5 @@ import org.springframework.data.couchbase.core.mapping.Document;
 @Data
 @Document
 public class PrimaryElementsObject {
-
     private String apReferenceVendorId;
-
 }

@@ -13,8 +13,6 @@ import org.springframework.data.couchbase.core.mapping.Document;
 @Data
 @Document
 public class AzDataObject {
-
     private AzMetaDataObject azMetaDataObject;
     private PrimaryElementsObject primaryElementsObject;
-
 }
