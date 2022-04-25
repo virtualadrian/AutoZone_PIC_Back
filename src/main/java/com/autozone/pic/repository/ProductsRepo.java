@@ -17,4 +17,5 @@ public interface ProductsRepo extends CouchbaseRepository<PRODUCT, String> {
     List<PRODUCT> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThan(String minusDays);
     List<PRODUCT> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContaining(String truncatedDateTime);
     List<PRODUCT> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThanAndAzDataObject_AzMetaDataObject_SchemaNm(String truncatedDateTime, String schemaName);
+    List<PRODUCT> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContainingAndAzDataObject_AzMetaDataObject_SchemaNm(String truncatedDateTime, String schemaName);
 }

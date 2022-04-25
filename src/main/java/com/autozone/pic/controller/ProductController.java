@@ -59,11 +59,25 @@ public class ProductController {
         return findByDate(daysFromToday).stream().count();
     }
 
+    @GetMapping(path = "find_count_by_date_and_schema")
+    @ResponseStatus(HttpStatus.OK)
+    public Long findCountByDateAndSchema(@RequestParam(value = "days") Integer daysFromToday,@RequestParam(value = "schemaName") String schemaName){
+        return findByDateAndSchema(daysFromToday, schemaName).stream().count();
+    }
+
+    @GetMapping(path = "find_by_date_and_schema")
+    @ResponseStatus(HttpStatus.OK)
+    public List<PRODUCT> findByDateAndSchema(@RequestParam(value = "days") Integer daysFromToday, @RequestParam(value = "schemaName") String schemaName){
+        String dateTime = LocalDateTime.now().minusDays(daysFromToday).toString();
+        String truncatedDateTime = dateTime.substring(0, dateTime.indexOf('T'));
+        return productsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContainingAndAzDataObject_AzMetaDataObject_SchemaNm(truncatedDateTime, schemaName);
+    }
+
     // Find all instances in the past xxx days with schema taken into account
 
     @GetMapping(path = "find_by_date_range_and_schema")
     @ResponseStatus(HttpStatus.OK)
-    public List<PRODUCT> findByDateAndSchemaName(@RequestParam(value = "days") Integer daysFromToday, @RequestParam(value = "schemaName") String schemaName){
+    public List<PRODUCT> findByDateRangeAndSchema(@RequestParam(value = "days") Integer daysFromToday, @RequestParam(value = "schemaName") String schemaName){
         String dateTime = LocalDateTime.now().minusDays(daysFromToday).toString();
         String truncatedDateTime = dateTime.substring(0, dateTime.indexOf('T'));
         return productsRepo.findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThanAndAzDataObject_AzMetaDataObject_SchemaNm(truncatedDateTime, schemaName);
@@ -74,8 +88,7 @@ public class ProductController {
     @GetMapping(path = "find_count_by_date_range_and_schema")
     @ResponseStatus(HttpStatus.OK)
     public long findCountByDateAndSchemaName(@RequestParam(value = "days") Integer daysFromToday, @RequestParam(value = "schemaName") String schemaName){
-
-        return findByDateAndSchemaName(daysFromToday, schemaName).stream().count();
+        return findByDateAndSchema(daysFromToday, schemaName).stream().count();
     }
 
     @GetMapping(path = "count")

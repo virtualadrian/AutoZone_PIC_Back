@@ -1,6 +1,5 @@
 package com.autozone.pic.repository;
 import com.autozone.pic.model.CATALOG;
-import com.autozone.pic.model.PRODUCT;
 import com.couchbase.client.java.query.QueryScanConsistency;
 import org.springframework.data.couchbase.repository.Collection;
 import org.springframework.data.couchbase.repository.CouchbaseRepository;
@@ -16,6 +15,6 @@ import java.util.List;
 @Collection()
 @ScanConsistency(query = QueryScanConsistency.REQUEST_PLUS)
 public interface CatalogsRepo extends CouchbaseRepository<CATALOG, String> {
-    List<PRODUCT> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThanAndAzDataObject_AzMetaDataObject_SchemaNm(Integer dateTime, String productCatalogFitment);
-    List<PRODUCT> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContainingAndAzDataObject_AzMetaDataObject_SchemaNm(String truncatedDateTime, String schemaName);
+    List<CATALOG> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsGreaterThanAndAzDataObject_AzMetaDataObject_SchemaNm(String dateTime, String schemaName);
+    List<CATALOG> findAllByAzDataObject_AzMetaDataObject_LastMaintainTsContainingAndAzDataObject_AzMetaDataObject_SchemaNm(String truncatedDateTime, String schemaName);
 }
