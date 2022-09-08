@@ -1,6 +1,6 @@
 package com.autozone.pic.config;
 
-import com.autozone.pic.model.PIES;
+import com.autozone.pic.model.CATALOG;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,12 +11,13 @@ import org.springframework.data.couchbase.SimpleCouchbaseClientFactory;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 import org.springframework.data.couchbase.core.CouchbaseTemplate;
 import org.springframework.data.couchbase.core.convert.CouchbaseCustomConversions;
+import org.springframework.data.couchbase.repository.config.EnableCouchbaseRepositories;
 import org.springframework.data.couchbase.repository.config.RepositoryOperationsMapping;
 
 import java.util.Collections;
 
-
 @Configuration
+@EnableCouchbaseRepositories(basePackages={"com.autozone.pic.repository"})
 public class Config extends AbstractCouchbaseConfiguration {
 
     @Autowired
@@ -60,8 +61,10 @@ public class Config extends AbstractCouchbaseConfiguration {
     @SneakyThrows
     @Override
     protected void configureRepositoryOperationsMapping(RepositoryOperationsMapping mapping) {
-        mapping.mapEntity(PIES.class,getCouchbaseTemplate(piesBucket ));
+        mapping.mapEntity(CATALOG.class,getCouchbaseTemplate(acesBucket ));
     }
+
+
 
     @SneakyThrows
     private CouchbaseTemplate getCouchbaseTemplate(String bucketName) throws Exception {
@@ -75,4 +78,29 @@ public class Config extends AbstractCouchbaseConfiguration {
     private CouchbaseClientFactory couchbaseClientFactory(String bucketName){
         return new SimpleCouchbaseClientFactory(couchbaseCluster(couchbaseClusterEnvironment()), bucketName, this.getScopeName());
     }
+//    private List<String> getOriginList() {
+//        return List.of("*");
+//    }
+//    @Bean
+//    public FilterRegistrationBean<CorsFilter> getCorsFilter() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true);
+//        config.setAllowedOrigins(getOriginList());
+//        config.addAllowedHeader("*");
+//        config.addAllowedMethod("GET");
+//        config.addAllowedMethod("HEAD");
+//        config.addAllowedMethod("POST");
+//        config.addAllowedMethod("PUT");
+//        config.addAllowedMethod("DELETE");
+//        config.addAllowedMethod("TRACE");
+//        config.addAllowedMethod("OPTIONS");
+//        config.addAllowedMethod("PATCH");
+//        source.registerCorsConfiguration("/**", config);
+//        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>();
+//        bean.setFilter(new CorsFilter(source));
+//        bean.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
+//        return bean;
+//    }
 }
+

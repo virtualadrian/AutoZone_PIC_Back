@@ -3,5 +3,11 @@ app:
     connection-string: couchbase://127.0.0.1
     user-name: tester1
     password: tester
-    bucket-PIES: PIES
-    bucket-ACES: ACES
+    bucket-PIES: PRODUCTS
+    bucket-ACES: CATALOG
+
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
